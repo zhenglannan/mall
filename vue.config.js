@@ -2,7 +2,7 @@ module.exports = {
   configureWebpack: {
     // 配置路径的时候
     resolve: {
-      // extension配置默认后缀名不用xie
+      // extension配置默认后缀名不用写
 
       // 别名的配置
       alias:{
