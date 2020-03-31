@@ -33,6 +33,7 @@ export default {
 .right {
   width: 60px;
   /* background: red; */
+  position: relative;
 }
 .center {
   flex: 1;

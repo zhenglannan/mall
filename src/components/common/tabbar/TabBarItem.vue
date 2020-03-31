@@ -1,10 +1,16 @@
 <template>
   <div class="tab-bar-item" @click="btnclick()">
     <!-- 这两个图片的插槽不能一样 -->
-      <div v-if='isActive'><slot name="item-icon-active"></slot></div>
-      <div v-else><slot name="item-icon"></slot></div>
-      <div :style="activeStyle"><slot name="item-text"></slot>  </div>
-  
+    <div v-if="isActive">
+      <slot name="item-icon-active"></slot>
+    </div>
+    <div v-else>
+      <slot name="item-icon"></slot>
+    </div>
+    <div :style="activeStyle">
+      <slot name="item-text"></slot>
+    </div>
+
     <!-- <img src="../../assets/img/tabbar/home.png" alt />
     <div>首页</div>-->
   </div>
@@ -32,8 +38,9 @@ export default {
     isActive() {
       // console.log( this.$route.path.indexOf(this.path));
       return this.$route.path.indexOf(this.path) !== -1;
-    },    activeStyle(){
-      return  this.isActive?{color:this.activeColor}:{}
+    },
+    activeStyle() {
+      return this.isActive ? { color: this.activeColor } : {};
     }
   }
 };
