@@ -57,8 +57,8 @@ export default {
       this.scroll.finishPullUp();
     },
     refresh() {
-      // 逻辑处理语句，先判断scroll存不存在，不存在就不执行后面的操作
       console.log("img load");
+      // 逻辑处理语句，先判断scroll存不存在，不存在就不执行后面的操作
       this.scroll && this.scroll.refresh();
     }
   }

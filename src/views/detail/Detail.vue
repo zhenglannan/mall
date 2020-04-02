@@ -13,6 +13,8 @@
     </Scroll>
     <DetailBottomBar @joinCart="joinCart"></DetailBottomBar>
     <ToTop @click.native="topclick" v-show="isShowToTop"></ToTop>
+    <!-- 传字符串可以不用加冒号 -->
+    <!-- <Toast :context="message" :show="show"></Toast> -->
   </div>
 </template>
 
@@ -28,6 +30,7 @@ import DetailRecommendInfo from "./children/DetailRecommendInfo";
 import DetailBottomBar from "./children/DetailBottomBar";
 
 import Scroll from "components/common/scroll/Scroll";
+// import Toast from "components/common/toast/Toast";
 
 import ToTop from "components/content/backtop/ToTop";
 
@@ -39,6 +42,7 @@ import {
   GoodsParam
 } from "network/detail";
 
+import { mapActions } from "vuex";
 export default {
   name: "Detail",
   data() {
@@ -54,7 +58,9 @@ export default {
       themeTopYs: [],
       getThemeTopYs: null,
       currentIndex: 0,
-      isShowToTop: false
+      isShowToTop: false,
+      // message: "",
+      // show: false
     };
   },
   components: {
@@ -68,9 +74,11 @@ export default {
     DetailRecommendInfo,
     DetailBottomBar,
     Scroll,
-    ToTop
+    ToTop,
+    // Toast
   },
   methods: {
+    ...mapActions(["addCart"]),
     getDetail(id) {
       getDetail(id).then(res => {
         // console.log(res);
@@ -115,13 +123,13 @@ export default {
         this.recommendList = res.data.list;
       });
     },
+    // navbar点击跳转对应的组件位置
     itemclick(index) {
       // console.log(index);
       this.$refs.scro.scroll.scrollTo(0, -this.themeTopYs[index]);
     },
     // 防抖操作，阻止频繁调用传入函数，使用新生成的函数
-    // 而新生成的函数不会频繁刷新，如果下一次执行来的非常快，那么下一次
-    // 执行来得非常快,那么会将上一次取消掉
+    // 而新生成的函数不会频繁刷新，如果下一次执行来的非常快，那么会将上一次取消掉
     debounce(func, delay) {
       // timer不会被销毁，因为在闭包中被引用
       let timer = null;
@@ -139,6 +147,7 @@ export default {
       this.$refs.scro.refresh();
       this.getThemeTopYs();
     },
+    // 滑到那个位置决定导航栏高亮显示（位置区间决定）
     scrollPosition(position) {
       this.isShowToTop = -position.y > 600;
       const positionY = -position.y;
@@ -150,7 +159,7 @@ export default {
             positionY > this.themeTopYs[Number(i)] &&
             positionY < this.themeTopYs[Number(i) + 1]) ||
           // 不能加三等号！！
-          (i == length - 1 && positionY > this.themeTopYs[Number(i)])
+          (i == length - 1 && positionY >= this.themeTopYs[Number(i)])
         ) {
           this.currentIndex = Number(i);
           // console.log(this.currentIndex);
@@ -163,6 +172,7 @@ export default {
       // 调用scroll组件中scroll数据方法(x,y,返回时间快慢)
       this.$refs.scro.scroll.scrollTo(0, 0, 500);
     },
+    // 加入购物车按钮点击事件
     joinCart() {
       // 获取购物车需要展示的信息
       const product = {};
@@ -171,7 +181,21 @@ export default {
       product.desc = this.goods.desc;
       product.price = this.goods.lowNowPrice;
       product.iid = this.id;
-      this.$store.dispatch('addCart',getRecommend)
+      // this.$store.dispatch('addCart',product).then(res=>{
+      //   console.log(res);
+      // })
+
+      this.addCart(product).then(res => {
+        // console.log(res);
+        // this.show = true;
+        // this.message = res;
+        // setTimeout(() => {
+        //   this.show = false;
+        // }, 1500); 
+        // console.log(  this.$toast.show());
+        
+        this.$toast.show(res,2000)
+      });
     }
   },
   activated() {
@@ -192,7 +216,8 @@ export default {
     this.id = this.$route.query.iid;
     this.getDetail(this.id);
     this.getRecommend();
-    // 给 this.getThemeTopYs赋值（对给this.themeTopYs赋值的操作进行防抖）
+    // 先定义方法getThemeTopYs：给 this.getThemeTopYs赋值（对给this.themeTopYs赋值的操作进行防抖）
+    // 在datailImgLoad图片加载函数中应用
     this.getThemeTopYs = this.debounce(() => {
       this.themeTopYs = [];
       this.themeTopYs.push(0);

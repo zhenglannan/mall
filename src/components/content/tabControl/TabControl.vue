@@ -1,6 +1,6 @@
 <template>
   <div class="TabControl">
-    <div v-for="(item,index) in title" :key="item.id" class="tabitem"
+    <div v-for="(item,index) in title" :key="index" class="tabitem"
     :class="{active:currentIndex===index}" @click="tabbtn(index)">
       <span>{{item}}</span>
     </div>
@@ -16,19 +16,19 @@ export default {
       currentIndex:0
     };
   },
-  methods: {
-    // 利用索引index来决定激活class
-    tabbtn(index){
-      this.currentIndex=index;
-      this.$emit("tabbtn",index)
-    }
-  },
   props: {
     title: {
       type: Array,
       default() {
         return [];
       }
+    }
+  },
+  methods: {
+    // 利用索引index来决定激活class
+    tabbtn(index){
+      this.currentIndex=index;
+      this.$emit("tabbtn",index)
     }
   }
 };

@@ -116,7 +116,7 @@ export default {
       // console.log(this.goods[this.currentType].page);
     },
     imageLoad() {
-      // console.log(this.$refs.tabs.$el.offsetTop);
+      // console.log(this.$refs.tabs2.$el.offsetTop);
       this.tabOffsetTop = this.$refs.tabs2.$el.offsetTop;
     },
     /*   网络请求相关的方法 */
