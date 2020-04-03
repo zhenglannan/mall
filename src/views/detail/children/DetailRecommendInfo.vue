@@ -30,7 +30,7 @@
 
 <style scoped>
   .recommend-info {
-    padding: 5px;
+    /* padding: 5px; */
   }
 
   .info-header {

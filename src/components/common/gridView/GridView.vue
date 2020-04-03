@@ -67,5 +67,6 @@
   .grid-view {
     display: flex;
     flex-wrap: wrap;
+    /* padding: 7px; */
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar class="datail-navbar">
+    <NavBar>
       <!-- <div class="left"> -->
       <div slot="left" class="leftsign" @click="backbtn"></div>
       <!-- </div> -->
