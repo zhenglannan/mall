@@ -22,8 +22,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 >此接口不是我的接口，禁止随便使用，想要使用可以添加大佬微信 coderwhy001
 
 # Vue购物商城移动端及逻辑实现 
+---
 ***技术栈实现：Vue-cli+Vue-Router+Vuex+axios***
 
+---
 **目录结构**
 ```
 ├─.browserslistrc
@@ -184,6 +186,7 @@ tab跳转，利用的是better-Scroll插件的scrollPosition监听位置并scrol
 * keep-alive保持组件不被销毁 ，再次进入时不被重新创建 exclude排除一些不用缓存的组价
 * ```fastClick.attach(document.body)```解决移动端点击事件300ms延时
 ### 细节：
+---
 * 首页tab部分，因为better-Scroll让stick布局失效，所以得再放一个tab组件，v-show控制显示
 * css3 中高度用calc()计算高度,符号之前必须有空格
 ```
@@ -193,6 +196,7 @@ widht: calc(12% + 5em)正确
 
 
  ### BUG：
+ ---
  * tab不能keep-alive，一个tab滑动，另一个tab页内容也跟着滑动
 
 
