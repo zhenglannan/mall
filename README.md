@@ -1,6 +1,6 @@
 >此接口不是我的接口，禁止随便使用，想要使用可以添加大佬微信 coderwhy001
 
-# Vue模拟蘑菇街app移动端及逻辑实现 
+# Vue购物商城移动端及逻辑实现 
 ***技术栈实现：Vue-cli+Vue-Router+Vuex+axios***
 
 **目录结构**
@@ -128,8 +128,10 @@
 
 
 **5个界面：首页、详情页分类、购物车、我的（'我的'界面因为没有任何逻辑实现，暂时没写）**
+
 >每个都是尽量封装成组件，便于调用，数据都是通过axios调用指定api接口，封装请求数据方法
 
+1.界面主要内容
  * 首页栏有导航栏、轮播图、特征、推荐表、tab页（流行、新款、精选）以及tab页下的商品列表页
 
 * 详情页有4个tab：商品、参数、评论、推荐，并根据
@@ -141,6 +143,25 @@ tab跳转，利用的是better-Scroll插件的scrollPosition监听位置并scrol
 
 * postcss.config.js里配置'postcss-px-to-viewport'插件，转换为视口单位vw
 
+2.值得注意的知识点
+* 路由懒加载 ```const xx=()=>{import('./xx') }```
+* 图片懒加载 v-lazy
+* 各种组件封装
+* img加载完刷新refresh
+* 上拉加载更多
+* $refs调用组件（$refs.xx.$el）和元素
+* ```@click.native``` 组件点击事件
+* debounce防抖
+* 事件总线```$bus.$emit```发送  ```$bus.$on```接收(先main.js中设置```Vue.prototype.$bus = new Vue()```vue实例是可以作为s事件总线的)
+* created（在created中是不能拿到$refs的值的），mounted（created里异步请求数据，在mounted里数据还不一定到,），activated，deactivated几个重要的生命周期函数
+* better-scroll的wrapper许设置百分比高度和``` overflow: hidden```;并且父组件设置```height：100vh```（因为100%是相对于父元素。要给父元素设定具体高度为100vh ！！）
+* slot插槽利用
+* flex布局
+* 路由跳转 ```this.$router.push```，可携带参数 query，params
+* 父子组件传值最好用小驼峰:```param-info```
+* ```...mapGetters(["getCartList", "getLength"])```,映射vuex中的getters方法
+* keep-alive保持组件不被销毁 ，再次进入时不被重新创建 exclude排除一些不用缓存的组价
+* ```fastClick.attach(document.body)```解决移动端点击事件300ms延时
 ### 细节：
 * 首页tab部分，因为better-Scroll让stick布局失效，所以得再放一个tab组件，v-show控制显示
 * css3 中高度用calc()计算高度,符号之前必须有空格
@@ -155,7 +176,8 @@ widht: calc(12% + 5em)正确
 
 
 
-# mall
+
+
 
 ## Project setup
 ```
