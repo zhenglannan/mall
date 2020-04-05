@@ -4,7 +4,7 @@ import {
 
 export function getDetail(iid) {
   return request({
-    url: '/api/h3/detail',
+    url: '/api/h8/detail',
     // 数据请求参数只能用params
     params: {
       iid
@@ -13,7 +13,7 @@ export function getDetail(iid) {
 }
 export function getRecommend() {
   return request({
-    url: '/api/h3/recommend',
+    url: '/api/h8/recommend',
   })
 }
 export class Goods {

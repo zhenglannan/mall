@@ -1,5 +1,5 @@
 <template>
-  <div id="tabcontent" class="left">
+  <div id="tabcontent">
     <slot></slot>
   </div>
 </template>
@@ -23,10 +23,10 @@ export default {
 <style scoped>
 #tabcontent {
   /* height: 100vh; */
-  /* padding-bottom: 87px;
-  width: 70%;
+  /* padding-bottom: 87px; */
+  /* width: 70%; */
   text-align: center;
   background: #ffffff;
-  font-size: 15px; */
+  font-size: 15px;
 }
 </style>

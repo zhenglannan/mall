@@ -2,10 +2,12 @@
   <div id="category" class="clearfix">
     <CategoryNavBar></CategoryNavBar>
 
-    <TabMenu :categories="categories" @select="select"></TabMenu>
-    <Scroll class="wrapper clearfix">
+    <TabMenu :categories="categories" @select="select" class="left"></TabMenu>
+    <Scroll class="wrapper">
       <TabContent>
-        <TabContentCategory :subcategories='showSubcategories'></TabContentCategory>
+        <TabContentCategory :subcategories="showSubcategories"></TabContentCategory>
+        <TabControl :title="['流行','新款','精选']" @tabbtn="tabClick"></TabControl>
+        <TabContentDetail :categoryDetail="showCategoriesDetail"></TabContentDetail>
       </TabContent>
     </Scroll>
   </div>
@@ -20,10 +22,13 @@ import {
 
 import Scroll from "common/scroll/Scroll";
 
+import TabControl from "components/content/tabControl/TabControl";
+
 import CategoryNavBar from "./children/CategoryNavBar";
 import TabMenu from "./children/TabMenu";
 import TabContent from "./children/TabContent";
 import TabContentCategory from "./children/TabContentCategory";
+import TabContentDetail from "./children/TabContentDetail";
 
 export default {
   name: "Category",
@@ -32,7 +37,8 @@ export default {
       categories: [],
       // maitKey:'',
       categoryData: {},
-      currentIndex: -1
+      currentIndex: -1,
+      currentType: "pop"
     };
   },
   components: {
@@ -40,14 +46,23 @@ export default {
     CategoryNavBar,
     TabMenu,
     TabContent,
-    TabContentCategory
+    TabContentCategory,
+    TabContentDetail,
+    TabControl
   },
   computed: {
-    showSubcategories(){
-      if(this.currentIndex===-1){
-        return {}
-      }else{
-        return this.categoryData[this.currentIndex].subcategories
+    showSubcategories() {
+      if (this.currentIndex === -1) {
+        return {};
+      } else {
+        return this.categoryData[this.currentIndex].subcategories;
+      }
+    },
+    showCategoriesDetail() {
+      if (this.currentIndex === -1) {
+        return {};
+      } else {
+        return this.categoryData[this.currentIndex].categoryDetail[this.currentType];
       }
     }
   },
@@ -62,9 +77,9 @@ export default {
           this.categoryData[i] = {
             subcategories: {},
             categoryDetail: {
-              pop: [],
-              new: [],
-              sell: []
+              "pop": [],
+              "new": [],
+              "sell": []
             }
           };
         }
@@ -72,13 +87,14 @@ export default {
         this.getSubcategory(0);
       });
     },
+    // 请求右边（上）数据
     getSubcategory(index) {
       this.currentIndex = index;
       const maitKey = this.categories[index].maitKey;
       // 获取右边分类数据（上）
       getSubcategory(maitKey).then(res => {
         // console.log(res.data);
-        this.categoryData[index].subcategories = res.data;
+        this.categoryData[index].subcategories = res.data.list;
         this.categoryData = { ...this.categoryData };
         this.getCategoryDetail("pop");
         this.getCategoryDetail("new");
@@ -92,7 +108,7 @@ export default {
       // 2.发送请求,传入miniWallkey和type
       getCategoryDetail(miniWallkey, type).then(res => {
         // 3.将获取的数据保存下来
-        // console.log(res);
+        console.log(res);
 
         this.categoryData[this.currentIndex].categoryDetail[type] = res;
         // ??
@@ -101,6 +117,19 @@ export default {
     },
     select(index) {
       this.getSubcategory(index);
+    },
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = "pop";
+          break;
+        case 1:
+          this.currentType = "new";
+          break;
+        case 2:
+          this.currentType = "sell";
+          break;
+      }
     }
   },
   created() {
@@ -110,10 +139,10 @@ export default {
 </script>
 
 <style scoped>
-#category{
+#category {
   height: 100vh;
 }
-.wrapper{
+.wrapper {
   height: 84%;
   overflow: hidden;
 }

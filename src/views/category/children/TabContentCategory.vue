@@ -3,7 +3,7 @@
     <GridView :cols="3" :line-space="15" :v-margin="20">
       <div class="item" v-for="(item,index) in subcategories" :key="index">
         <a :href="item.link">
-          <img class="item-img" src="item.image" alt />
+          <img class="item-img" :src="item.image" alt />
           <div class="item-text">{{item.title}}</div>
         </a>
       </div>

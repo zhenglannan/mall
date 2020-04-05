@@ -2,13 +2,13 @@ import {request} from './request';
 
 export function getHomeMultidata(){
   return request({
-    url:'/api/h3/home/multidata'
+    url:'/api/h8/home/multidata'
   })
 }
 
 export function getHomeGoods(type,page){
   return request({
-    url:'/api/h3/home/data',
+    url:'/api/h8/home/data',
     params:{
       type,
       page

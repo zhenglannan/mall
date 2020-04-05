@@ -1,5 +1,5 @@
 <template>
-  <div id="tabmenu" class="left">
+  <div id="tabmenu">
     <Scroll class="wrapper">
       <div
         v-for="(item,index) in categories"

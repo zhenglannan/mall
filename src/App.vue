@@ -21,6 +21,7 @@ export default {
 
 <style>
 @import "assets/css/base.css";
+@import "assets/css/border.css";
 .maintabbar {
   position: fixed;
   bottom: 0;

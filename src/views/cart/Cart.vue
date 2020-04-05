@@ -52,10 +52,10 @@ export default {
 <style scoped>
 #cart {
   height: 100vh;
-  padding-bottom: 95px;
+  /* padding-bottom: calc(100% - ); */
 }
 .wrapper {
-  height: 92%;
+  height: calc(100% - 2 * 49px - 38px);
   /* height: calc(100%-52px); */
   overflow: hidden;
 }
