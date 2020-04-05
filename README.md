@@ -1,3 +1,24 @@
+
+# mall
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
 >此接口不是我的接口，禁止随便使用，想要使用可以添加大佬微信 coderwhy001
 
 # Vue购物商城移动端及逻辑实现 
@@ -178,24 +199,6 @@ widht: calc(12% + 5em)正确
 
 
 
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
