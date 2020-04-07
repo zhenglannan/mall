@@ -1,4 +1,5 @@
 module.exports = {
+  // publicPath:'./',
   configureWebpack: {
     // 配置路径的时候
     resolve: {

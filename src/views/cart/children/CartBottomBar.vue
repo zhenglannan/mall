@@ -59,7 +59,7 @@ export default {
     },
     // 全选按钮状态改变
     isSelectAll() {
-      // 根据不选中的item的数量决定状态
+        // 根据不选中的item的数量决定状态
       if (this.getLength === 0) {
         return false;
       } else {
